@@ -1,0 +1,32 @@
+---
+title: "Advent of Code 2021"
+author: "AJ Catalano"
+date: "12/3/2021"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Day 1
+
+#### Part 1: count the number of times a depth measurement increases from the previous measurement.
+
+```{r}
+sonar_data = read.delim("./data/input_day1.txt", header = FALSE)
+
+sonar_data_lag = read.delim("./data/input_day1.txt", header = FALSE) |> 
+  lag()
+
+sum(sonar_data > sonar_data_lag, na.rm = TRUE)
+```
+
+##### Part 2: Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
+
+```{r}
+sonar_data_lead = read.delim("./data/input_day1.txt", header = FALSE) |> 
+  lead(n = 3)
+
+sum(sonar_data < sonar_data_lead, na.rm = TRUE)
+```
